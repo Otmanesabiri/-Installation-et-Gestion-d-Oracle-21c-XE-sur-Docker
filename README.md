@@ -22,9 +22,9 @@ systemctl status docker
 # Vérifier les droits utilisateur sur Docker
 groups | grep docker
 ```
-![alt text](<Capture d’écran du 2025-03-17 23-26-15.png>)
+![Image](<Capture d’écran du 2025-03-17 23-26-15.png>)
 
-![alt text](<Capture d’écran du 2025-03-17 23-28-31.png>)
+![Image](<Capture d’écran du 2025-03-17 23-28-31.png>)
 
 ### 1.2. Téléchargement de l'image Oracle
 
@@ -35,7 +35,7 @@ docker pull gvenzl/oracle-xe:21
 # Vérifier si l'image est disponible localement
 docker images | grep oracle-xe
 ```
-![alt text](image.png)
+![Image](image.png)
 
 ### 1.3. Création et démarrage du conteneur Oracle
 
@@ -52,8 +52,8 @@ docker run -d \
 # Vérifier le démarrage
 docker logs -f glsid2025
 ```
-![alt text](<Capture d’écran du 2025-03-17 23-34-19.png>) 
-![alt text](<Capture d’écran du 2025-03-17 23-36-24.png>)
+![Image](<Capture d’écran du 2025-03-17 23-34-19.png>) 
+![Image](<Capture d’écran du 2025-03-17 23-36-24.png>)
 
 ## Partie 2 : Gestion d'instance
 
@@ -68,7 +68,7 @@ ls -la /opt/oracle
 ls -la /opt/oracle/oradata
 ls -la /opt/oracle/product
 ```
-![alt text](<Capture d’écran du 2025-03-17 23-39-25.png>)
+![Image](<Capture d’écran du 2025-03-17 23-39-25.png>)
 
 
 ### 2.2. Identification de la valeur SID
@@ -88,7 +88,7 @@ SELECT distinct sid FROM v$mystat;
 SELECT * FROM global_name;
 SELECT instance FROM v$thread;
 ```
-![alt text](<Capture d’écran du 2025-03-17 23-57-28.png>)
+![Image](<Capture d’écran du 2025-03-17 23-57-28.png>)
 
 ### 2.3. Identification des services Oracle
 
@@ -109,10 +109,10 @@ SELECT instance_name, status FROM v$instance;
 SELECT username, sid, serial# FROM v$session;
 ```
 # Vérifier les processus en cours d'exécution
-![alt text](<Capture d’écran du 2025-03-18 00-07-02.png>)
+![Image](<Capture d’écran du 2025-03-18 00-07-02.png>)
 
 # Afficher les noms et descriptions des processus en arrière-plan
-![alt text](<Capture d’écran du 2025-03-18 00-10-04.png>)
+![Image](<Capture d’écran du 2025-03-18 00-10-04.png>)
 
 ### 2.4. Connexion à Oracle Enterprise Manager
 
@@ -126,7 +126,7 @@ echo "Utilisateur: sys"
 echo "Mot de passe: Glsid2024-2025"
 echo "Connexion en tant que: sysdba"
 ```
-![alt text](<Capture d’écran du 2025-03-18 00-42-33.png>)
+![Image](<Capture d’écran du 2025-03-18 00-42-33.png>)
 
 notez qu'il faut HTTP activé dans la base de donnée oracle crée cela ça va marcher avec EM DataBase Express Edition
 
@@ -211,8 +211,8 @@ Note : assurer que base de donnée est démarée
 -- If not OPEN, start the database
 STARTUP;
 
-![alt text](<Capture d’écran du 2025-03-18 02-26-46.png>) 
-![alt text](<Capture d’écran du 2025-03-18 02-42-44.png>)
+![Image](<Capture d’écran du 2025-03-18 02-26-46.png>) 
+![Image](<Capture d’écran du 2025-03-18 02-42-44.png>)
 
 # Exemple : création de la table students 
 ```sql
@@ -225,8 +225,8 @@ CREATE TABLE students (
 
 ```
 
-![alt text](<Capture d’écran du 2025-03-18 19-11-24.png>) 
-![alt text](<Capture d’écran du 2025-03-18 19-17-27.png>)
+![Image](<Capture d’écran du 2025-03-18 19-11-24.png>) 
+![Image](<Capture d’écran du 2025-03-18 19-17-27.png>)
 
 
 ### 2.10. Modification des paramètres de l'instance en lecture seule
@@ -257,13 +257,15 @@ EOF
 ```
 qlq utilisateur qui sont OPEN
 
-![alt text](<Capture d’écran du 2025-03-18 19-34-51.png>) 
-![alt text](<Capture d’écran du 2025-03-18 19-35-38.png>)
+![Image](<Capture d’écran du 2025-03-18 19-34-51.png>) 
+![Image](<Capture d’écran du 2025-03-18 19-35-38.png>)
 
 ### 2.12. Activation du compte HR
 
 ```bash
-docker exec -it glsid2025 sqlplus sys/Glsid2024-2025@XE as sysdba << EOF
+docker exec -it glsid2025 sqlplus sys/Glsid2024-2025@XE as sysdba 
+```
+```sql
 -- Vérifier si HR existe
 SELECT username, account_status FROM dba_users WHERE username = 'HR';
 
@@ -276,14 +278,10 @@ GRANT CONNECT, RESOURCE TO hr;
 GRANT CREATE VIEW TO hr;
 GRANT UNLIMITED TABLESPACE TO hr;
 
--- Optionnel: Installer le schéma HR si nécessaire
--- Utiliser @?/demo/schema/human_resources/hr_main.sql (à adapter)
-
 EXIT;
-EOF
 ```
-![alt text](<Capture d’écran du 2025-03-18 19-39-43.png>) 
-![alt text](<Capture d’écran du 2025-03-18 19-40-22.png>)
+![Image](<Capture d’écran du 2025-03-18 19-39-43.png>) 
+![Image](<Capture d’écran du 2025-03-18 19-40-22.png>)
 
 ### 2.13. Identification du fichier de paramètres du serveur
 
@@ -319,7 +317,7 @@ SELECT tablespace_name, status FROM dba_tablespaces;
 SELECT file_name, tablespace_name, bytes/1024/1024 "Size (MB)" FROM dba_data_files;
 EXIT;
 ```
-![alt text](<Capture d’écran du 2025-03-18 20-23-13.png>)
+![Image](<Capture d’écran du 2025-03-18 20-23-13.png>)
 
 ### 2.15. Identification des fichiers journaux de rétablissement
 
@@ -328,7 +326,7 @@ docker exec -it glsid2025 sqlplus sys/Glsid2024-2025@XE as sysdba
 SELECT group#, member FROM v$logfile;
 EXIT;
 ```
-![alt text](<Capture d’écran du 2025-03-18 20-32-44.png>)
+![Image](<Capture d’écran du 2025-03-18 20-32-44.png>)
 
 
 ### 2.16. Identification des fichiers de contrôle
@@ -338,7 +336,7 @@ docker exec -it glsid2025 sqlplus sys/Glsid2024-2025@XE as sysdba
 SELECT name FROM v$controlfile;
 EXIT;
 ```
-![alt text](<Capture d’écran du 2025-03-18 20-36-02.png>)
+![Image](<Capture d’écran du 2025-03-18 20-36-02.png>)
 
 ### 2.17. Identification du référentiel de diagnostic automatique (ADR)
 
@@ -348,9 +346,9 @@ SHOW PARAMETER diagnostic_dest;
 SELECT name, value FROM v$diag_info;
 EXIT;
 ```
-![alt text](<Capture d’écran du 2025-03-18 20-38-09.png>)
-![alt text](<Capture d’écran du 2025-03-18 20-39-00.png>) 
-![alt text](<Capture d’écran du 2025-03-18 20-39-24.png>)
+![Image](<Capture d’écran du 2025-03-18 20-38-09.png>)
+![Image](<Capture d’écran du 2025-03-18 20-39-00.png>) 
+![Image](<Capture d’écran du 2025-03-18 20-39-24.png>)
 
 ### 2.18. Arrêt du listener
 
@@ -399,46 +397,46 @@ docker exec -it glsid2025 sqlplus sys/Glsid2024-2025@XE as sysdba
 ```
 
 
-```bash
-# 2. Views with ALL_ prefix (all accessible objects)
+```sql
+-- 2. Views with ALL_ prefix (all accessible objects)
 SELECT OWNER, OBJECT_NAME, OBJECT_TYPE
 FROM DBA_OBJECTS
 WHERE OBJECT_NAME LIKE 'ALL_%' AND ROWNUM <= 20
 ORDER BY OWNER, OBJECT_NAME;
 ```
-![alt text](<Capture d’écran du 2025-03-18 21-00-59.png>) 
-![alt text](<Capture d’écran du 2025-03-18 21-01-30.png>) 
-![alt text](<Capture d’écran du 2025-03-18 21-01-59.png>) 
-![alt text](<Capture d’écran du 2025-03-18 21-02-19.png>) 
-![alt text](<Capture d’écran du 2025-03-18 21-02-40.png>)
+![Image](<Capture d’écran du 2025-03-18 21-00-59.png>) 
+![Image](<Capture d’écran du 2025-03-18 21-01-30.png>) 
+![Image](<Capture d’écran du 2025-03-18 21-01-59.png>) 
+![Image](<Capture d’écran du 2025-03-18 21-02-19.png>) 
+![Image](<Capture d’écran du 2025-03-18 21-02-40.png>)
 
-```bash
-# 3. Views with USER_ prefix (current user's objects)
+```sql
+--3. Views with USER_ prefix (current user's objects)
 SELECT OBJECT_NAME, OBJECT_TYPE
 FROM USER_OBJECTS
 WHERE OBJECT_NAME LIKE 'USER_%' AND ROWNUM <= 20
 ORDER BY OBJECT_NAME;
 ```
-![alt text](<Capture d’écran du 2025-03-18 21-14-14.png>)
- ![alt text](<Capture d’écran du 2025-03-18 21-14-28.png>)
- ![alt text](<Capture d’écran du 2025-03-18 21-14-47.png>)
+![Image](<Capture d’écran du 2025-03-18 21-14-14.png>)
+ ![Image](<Capture d’écran du 2025-03-18 21-14-28.png>)
+ ![Image](<Capture d’écran du 2025-03-18 21-14-47.png>)
 
 
-```bash
-#4. Public synonyms
+```sql
+--4. Public synonyms
 SELECT OWNER, SYNONYM_NAME, TABLE_OWNER, TABLE_NAME
 FROM ALL_SYNONYMS 
 WHERE OWNER = 'PUBLIC' AND ROWNUM <= 20;
 ```
-![alt text](<Capture d’écran du 2025-03-18 21-15-50.png>) 
-![alt text](<Capture d’écran du 2025-03-18 21-17-28.png>)
+![Image](<Capture d’écran du 2025-03-18 21-15-50.png>) 
+![Image](<Capture d’écran du 2025-03-18 21-17-28.png>)
 
 ```sql
 --5. Data dictionary cache
 SELECT * FROM DICTIONARY WHERE TABLE_NAME LIKE '%CACHE%';
 ```
-![alt text](<Capture d’écran du 2025-03-18 21-18-51.png>)
-![alt text](<Capture d’écran du 2025-03-18 21-19-05.png>)
+![Image](<Capture d’écran du 2025-03-18 21-18-51.png>)
+![Image](<Capture d’écran du 2025-03-18 21-19-05.png>)
 
 ```SQL
 --6. Background processes
@@ -447,19 +445,19 @@ DESC V$BGPROCESS;
 
 SELECT * FROM V$BGPROCESS WHERE ROWNUM <= 10;
 ```
-![alt text](<Capture d’écran du 2025-03-18 21-26-30.png>)
+![Image](<Capture d’écran du 2025-03-18 21-26-30.png>)
 
 ```sql
 -- 7. Instance information
 SELECT instance_name, version, host_name, status FROM V$INSTANCE;
 ```
-![alt text](<Capture d’écran du 2025-03-18 21-27-28.png>)
+![Image](<Capture d’écran du 2025-03-18 21-27-28.png>)
 
 ```sql
 --8. Database information
 SELECT name, created, log_mode, open_mode FROM V$DATABASE;
 ```
-![alt text](<Capture d’écran du 2025-03-18 21-30-23.png>)
+![Image](<Capture d’écran du 2025-03-18 21-30-23.png>)
 
 ```sql
 -- 9. Database parameters
@@ -467,13 +465,13 @@ COLUMN NAME FORMAT A30
 COLUMN VALUE FORMAT A50
 SELECT name, value FROM V$PARAMETER WHERE ROWNUM <= 20;
 ```
-![alt text](<Capture d’écran du 2025-03-18 21-31-59.png>)
+![Image](<Capture d’écran du 2025-03-18 21-31-59.png>)
 
 ```sql
 -- 10. Control file locations
 SELECT name FROM V$CONTROLFILE;
 ```
-![alt text](<Capture d’écran du 2025-03-18 21-32-42.png>)
+![Image](<Capture d’écran du 2025-03-18 21-32-42.png>)
 
 ```sql
 --11. Redo log file locations
@@ -482,21 +480,21 @@ COLUMN STATUS FORMAT A10
 SELECT GROUP#, MEMBER, STATUS FROM V$LOGFILE;
 
 ```
-![alt text](<Capture d’écran du 2025-03-18 21-34-03.png>)
+![Image](<Capture d’écran du 2025-03-18 21-34-03.png>)
 
 ```sql
 -- 12. Tablespaces
 DES V$TABLESPACE;
 
 ```
-![alt text](<Capture d’écran du 2025-03-18 21-35-53.png>)
+![Image](<Capture d’écran du 2025-03-18 21-35-53.png>)
 
 ```sql
 -- 13. Datafile information
 COLUMN NAME FORMAT A50
 SELECT name, block_size FROM V$DATAFILE;
 ```
-![alt text](<Capture d’écran du 2025-03-18 21-39-55.png>)
+![Image](<Capture d’écran du 2025-03-18 21-39-55.png>)
 
 ```sql
 -- 14. Tablespace-datafile mapping
@@ -506,7 +504,7 @@ SELECT d.name AS datafile_name, t.name AS tablespace_name
 FROM V$DATAFILE d 
 JOIN V$TABLESPACE t ON d.ts# = t.ts#;
 ```
-![alt text](<Capture d’écran du 2025-03-18 21-40-48.png>)
+![Image](<Capture d’écran du 2025-03-18 21-40-48.png>)
 
 
 ```sql
@@ -514,7 +512,7 @@ JOIN V$TABLESPACE t ON d.ts# = t.ts#;
 SELECT name, open_mode, restricted FROM V$PDBS;
 EXIT;
 ```
-![alt text](<Capture d’écran du 2025-03-18 21-41-28.png>)
+![Image](<Capture d’écran du 2025-03-18 21-41-28.png>)
 ## Conclusion
 
 Ce TP a permis de découvrir et de valider les différentes étapes nécessaires pour installer et configurer une base de données Oracle 21c XE à l'aide de Docker, ainsi que pour gérer l'instance et consulter le dictionnaire des données. Les commandes et captures d'écran fournies dans ce document démontrent la réalisation des tâches demandées.
