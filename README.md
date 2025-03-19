@@ -252,7 +252,7 @@ SELECT * FROM students ORDER BY student_id;
 -- Commit the changes to save them permanently
 COMMIT;
 ```
-
+![Image](<Capture d’écran du 2025-03-19 13-21-36.png>)
 
 ### 2.10. Modification des paramètres de l'instance en lecture seule
 
