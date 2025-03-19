@@ -228,6 +228,31 @@ CREATE TABLE students (
 ![Image](<Capture d’écran du 2025-03-18 19-11-24.png>) 
 ![Image](<Capture d’écran du 2025-03-18 19-17-27.png>)
 
+```sql
+INSERT ALL
+    INTO students (student_id, first_name, last_name, enrollment_date) 
+        VALUES (1, 'Mohammed', 'Alaoui', TO_DATE('2024-09-01', 'YYYY-MM-DD'))
+    INTO students (student_id, first_name, last_name, enrollment_date) 
+        VALUES (2, 'Fatima', 'Benali', TO_DATE('2024-09-01', 'YYYY-MM-DD'))
+    INTO students (student_id, first_name, last_name, enrollment_date) 
+        VALUES (3, 'Ahmed', 'Khatib', TO_DATE('2023-09-15', 'YYYY-MM-DD'))
+    INTO students (student_id, first_name, last_name, enrollment_date) 
+        VALUES (4, 'Leila', 'Tahiri', TO_DATE('2024-01-10', 'YYYY-MM-DD'))
+    INTO students (student_id, first_name, last_name, enrollment_date) 
+        VALUES (5, 'Omar', 'Bennani', TO_DATE('2023-09-15', 'YYYY-MM-DD'))
+SELECT * FROM dual;
+
+-- Alternative approach: Individual inserts
+INSERT INTO students (student_id, first_name, last_name, enrollment_date)
+VALUES (6, 'Samira', 'El Mansouri', TO_DATE('2024-02-20', 'YYYY-MM-DD'));
+
+-- Verify the inserted data
+SELECT * FROM students ORDER BY student_id;
+
+-- Commit the changes to save them permanently
+COMMIT;
+```
+
 
 ### 2.10. Modification des paramètres de l'instance en lecture seule
 
